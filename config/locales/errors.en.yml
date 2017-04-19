@@ -1,0 +1,5 @@
+en:
+  error_codes:
+    parameter_missing:
+      code: 1
+      message: A required parameter was missing in your request.

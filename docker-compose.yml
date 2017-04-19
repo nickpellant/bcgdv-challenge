@@ -1,13 +1,40 @@
-prog_image:
-  build: .
-  volumes:
-    - .:/prog_image
-  ports:
-    - "3000:3000"
-  links:
-    - postgres
+version: "2"
 
-postgres:
-  image: postgres:latest
-  ports:
-    - "5432"
+services:
+  api:
+    build: .
+    volumes:
+      - .:/prog_image
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379
+
+  worker:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/prog_image
+    links:
+      - postgres
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432"
+    volumes:
+      - postgres:/var/lib/postgres/data
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379"
+
+volumes:
+  postgres: {}
