@@ -1,7 +1,7 @@
 module Api
   class ImagesController < ApplicationController
     def create
-      create_accepted
+      CreateImageEndpoint.new(controller: self).call
     end
 
     def create_accepted

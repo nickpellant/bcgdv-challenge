@@ -1,3 +1,0 @@
-example_id                                     | status | run_time        |
----------------------------------------------- | ------ | --------------- |
-./spec/requests/api/images/create_spec.rb[1:1] | passed | 0.02679 seconds |
