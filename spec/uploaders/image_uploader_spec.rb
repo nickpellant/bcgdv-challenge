@@ -24,7 +24,7 @@ RSpec.describe ImageUploader, type: :uploader do
 
     it 'it stores the file that was passed' do
       expect(image_uploader.current_path).to(
-        eql('/prog_image/public/uploads/uploader_image.png')
+        include('public/uploads/uploader_image.png')
       )
     end
   end
