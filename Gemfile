@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'dry-validation', '~> 0.10.5'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
+gem 'reform', '~> 2.2.4'
+gem 'reform-rails', '~> 0.1.7'
 
 group :development, :test do
   gem 'listen', '~> 3.0.5'
