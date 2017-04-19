@@ -19,7 +19,7 @@ RSpec.describe ImageUploader, type: :uploader do
 
     after(:example) { image_uploader.remove! }
 
-    it 'is matches the file passed' do
+    it 'it stores the file that was passed' do
       expect(image_uploader).to be_format('png')
       expect(image_uploader).to have_dimensions(150, 150)
     end

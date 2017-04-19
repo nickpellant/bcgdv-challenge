@@ -10,10 +10,26 @@ RSpec.describe CreateImageEndpoint, type: :service do
 
     before(:example) { call }
 
-    let(:controller) { instance_spy('Api::ImagesController') }
+    let(:controller) { instance_spy('Api::ImagesController', params: params) }
+    let(:params) { ActionController::Parameters.new(file: file) }
 
-    it 'responds with an accepted status' do
-      expect(controller).to have_received(:create_accepted)
+    context 'when image file is valid' do
+      let(:file_path) do
+        Rails.root.join('spec', 'support', 'uploader_image.png')
+      end
+      let(:file) { File.open(file_path) }
+
+      it 'responds with an accepted status' do
+        expect(controller).to have_received(:create_accepted)
+      end
+    end
+
+    context 'when image file is invalid' do
+      let(:file) { nil }
+
+      it 'responds with an unprocessable_entity status' do
+        expect(controller).to have_received(:create_bad_request)
+      end
     end
   end
 end
