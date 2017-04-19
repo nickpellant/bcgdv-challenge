@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'carrierwave', '~> 1.0'
 gem 'dry-validation', '~> 0.10.5'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'

@@ -41,6 +41,10 @@ GEM
     arel (7.1.4)
     ast (2.3.0)
     builder (3.2.3)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     concurrent-ruby (1.0.5)
     declarative (0.0.9)
     declarative-builder (0.1.0)
@@ -193,6 +197,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave (~> 1.0)
   dry-validation (~> 0.10.5)
   listen (~> 3.0.5)
   pg (~> 0.18)
