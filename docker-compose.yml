@@ -1,0 +1,13 @@
+prog_image:
+  build: .
+  volumes:
+    - .:/prog_image
+  ports:
+    - "3000:3000"
+  links:
+    - postgres
+
+postgres:
+  image: postgres:latest
+  ports:
+    - "5432"
