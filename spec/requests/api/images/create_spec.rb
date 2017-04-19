@@ -1,9 +1,6 @@
 require 'rails_helper'
-require 'carrierwave/test/matchers'
 
 RSpec.describe 'Create Image', type: :request do
-  include CarrierWave::Test::Matchers
-
   subject(:perform_request) { post(api_images_url, params: params) }
 
   let(:image_file_path) do
@@ -15,11 +12,13 @@ RSpec.describe 'Create Image', type: :request do
 
     let(:created_image) { Image.last }
 
-    it 'creates the image and responds with an accepted status' do
+    it 'creates the image record and responds with an accepted status' do
       expect { perform_request }.to(change { Image.count })
 
-      expect(created_image.file).to be_format('png')
-      expect(created_image.file).to have_dimensions(150, 150)
+      expect(created_image.file.file).to be_nil
+      expect(created_image.file_tmp).to include('uploader_image.png')
+
+      expect(CarrierWave::Workers::StoreAsset.jobs.size).to eql(1)
 
       expect(response).to have_http_status(:accepted)
     end

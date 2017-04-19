@@ -1,9 +1,6 @@
 require 'rails_helper'
-require 'carrierwave/test/matchers'
 
 RSpec.describe ImageUploader, type: :uploader do
-  include CarrierWave::Test::Matchers
-
   subject(:image_uploader) { described_class.new }
 
   let(:image_file_path) do
@@ -15,13 +12,20 @@ RSpec.describe ImageUploader, type: :uploader do
       File.open(image_file_path) { |file| image_uploader.store!(file) }
     end
 
-    before(:example) { store }
+    before(:example) do
+      described_class.enable_processing = true
+      store
+    end
 
-    after(:example) { image_uploader.remove! }
+    after(:example) do
+      described_class.enable_processing = false
+      image_uploader.remove!
+    end
 
     it 'it stores the file that was passed' do
-      expect(image_uploader).to be_format('png')
-      expect(image_uploader).to have_dimensions(150, 150)
+      expect(image_uploader.current_path).to(
+        eql('/prog_image/public/uploads/uploader_image.png')
+      )
     end
   end
 end

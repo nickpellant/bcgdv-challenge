@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave_backgrounder', '~> 0.4.2'
 gem 'dry-validation', '~> 0.10.5'
 gem 'mini_magick', '~> 4.7.0'
 gem 'pg', '~> 0.18'

@@ -45,3 +45,4 @@ bower.json
 .byebug_history
 
 spec/examples.txt
+public/uploads/*
